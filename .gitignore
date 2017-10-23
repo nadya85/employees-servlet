@@ -27,4 +27,3 @@ fabric.properties
 
 build/
 .gradle/
-gradle/
