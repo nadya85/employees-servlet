@@ -54,7 +54,8 @@ public class EmployeeServlet extends HttpServlet {
             if (employee != null) {
                 employeeDao.delete(employee);
             }
-            dispatcher = this.getServletContext().getRequestDispatcher(USER_PAGE);
+            resp.sendRedirect("/employee");
+            return;
         } else {
             dispatcher = this.getServletContext().getRequestDispatcher(USER_PAGE);
         }
