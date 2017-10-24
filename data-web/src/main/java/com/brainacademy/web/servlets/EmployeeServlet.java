@@ -39,7 +39,8 @@ public class EmployeeServlet extends HttpServlet {
         String path = req.getPathInfo();
         RequestDispatcher dispatcher;
         if (path != null && path.endsWith("edit")) {
-            dispatcher = this.getServletContext().getRequestDispatcher(USER_EDIT_PAGE);
+            dispatcher = this.getServletContext().getRequestDispatcher(
+                    USER_EDIT_PAGE);
             String idParam = req.getParameter("id");
             Employee employee;
             if (idParam != null) {
@@ -60,7 +61,15 @@ public class EmployeeServlet extends HttpServlet {
             dispatcher = this.getServletContext().getRequestDispatcher(USER_PAGE);
         }
 
-        List<Employee> employees = employeeDao.getAll();
+        Integer page = NumberUtils.toInt(
+                req.getParameter("page"), 1);
+
+
+        List<Employee> employees = employeeDao.getAll(page);
+        req.setAttribute("totalPage",
+                (int) Math.floor(employeeDao.count()/10));
+
+        req.setAttribute("page", page);
         req.setAttribute("employees", employees);
 
         dispatcher.forward(req, resp);
@@ -80,7 +89,8 @@ public class EmployeeServlet extends HttpServlet {
         Employee employee = (id > 0) ? employeeDao.getOne(id) : new Employee();
         employee.setName(name);
         employee.setGender(gender);
-        employee.setDepartment((departmentId > 0) ? departmentDao.getOne(departmentId) : null);
+        employee.setDepartment((departmentId > 0) ? departmentDao
+                .getOne(departmentId) : null);
 
         List<String> errors = new ArrayList<>();
         if (StringUtils.isEmpty(name)) {
@@ -96,7 +106,8 @@ public class EmployeeServlet extends HttpServlet {
         }
 
         try {
-            employee.setBirthDate(DateUtils.parseDate(birthDateParam, "yyyy-MM-dd"));
+            employee.setBirthDate(DateUtils.parseDate(
+                    birthDateParam, "yyyy-MM-dd"));
         } catch (ParseException e) {
             errors.add("Incorrect the Birth Date");
         }
@@ -111,7 +122,8 @@ public class EmployeeServlet extends HttpServlet {
             req.setAttribute("errors", errors);
             req.setAttribute("departments", departmentDao.getAll());
             req.setAttribute("employee", employee);
-            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(USER_EDIT_PAGE);
+            RequestDispatcher dispatcher = this.getServletContext()
+                    .getRequestDispatcher(USER_EDIT_PAGE);
             dispatcher.forward(req, resp);
         } else {
             if (id == 0) {
