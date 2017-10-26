@@ -24,7 +24,7 @@
                 <a href="/employee/edit?id=${employee.id}" class="btn btn-default btn-sm edit">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </a>
-                <a href="/employee/delete?id=${employee.id}" class="btn btn-danger btn-sm">
+                <a href="/employee/delete?id=${employee.id}" class="btn btn-danger btn-sm delete">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
             </td>

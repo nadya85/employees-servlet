@@ -2,10 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-
 <c:if test="${!empty errors}">
     <div class="row">
-        <ul class="col-sm-offset-2">
+        <ul class="col-sm-offset-3">
             <c:forEach var="error" items="${errors}">
                 <li class="text-danger">${error}</li>
             </c:forEach>
@@ -15,16 +14,16 @@
 <form class="form-horizontal" action="/employee" method="post">
     <input type="hidden" name="id" value="${employee.id}">
     <div class="form-group">
-        <label for="name" class="col-sm-2 control-label">Employee Name:</label>
-        <div class="col-sm-10">
+        <label for="name" class="col-sm-3 control-label">Employee Name:</label>
+        <div class="col-sm-9">
             <input type="text" class="form-control"
                    id="name" name="name"
                    placeholder="Employee Name" value="${employee.name}"/>
         </div>
     </div>
     <div class="form-group">
-        <label for="gender" class="col-sm-2 control-label">Gender:</label>
-        <div class="col-sm-10">
+        <label for="gender" class="col-sm-3 control-label">Gender:</label>
+        <div class="col-sm-9">
             <select class="form-control" id="gender" name="gender" placeholder="Employee Name">
                 <option value="M" ${employee.gender=="M" ? "selected" : ""}>Male</option>
                 <option value="F" ${employee.gender=="F" ? "selected" : ""}>Female</option>
@@ -32,8 +31,8 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="birthDate" class="col-sm-2 control-label">Birth Date:</label>
-        <div class="col-sm-10">
+        <label for="birthDate" class="col-sm-3 control-label">Birth Date:</label>
+        <div class="col-sm-9">
             <fmt:formatDate value="${employee.birthDate}"
                             type="date"
                             pattern="yyyy-MM-dd"
@@ -43,8 +42,8 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="hireDate" class="col-sm-2 control-label">Hire Date:</label>
-        <div class="col-sm-10">
+        <label for="hireDate" class="col-sm-3 control-label">Hire Date:</label>
+        <div class="col-sm-9">
             <fmt:formatDate value="${employee.hireDate}"
                             type="date"
                             pattern="yyyy-MM-dd"
@@ -54,8 +53,8 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="departmentId" class="col-sm-2 control-label">Department:</label>
-        <div class="col-sm-10">
+        <label for="departmentId" class="col-sm-3 control-label">Department:</label>
+        <div class="col-sm-9">
             <select class="form-control" id="departmentId" name="departmentId">
                 <c:forEach var="department" items="${departments}">
                     <option value="${department.id}"
@@ -64,15 +63,6 @@
                     </option>
                 </c:forEach>
             </select>
-        </div>
-    </div>
-
-    <div class="container-fluid controls-bar">
-        <div class="row">
-            <div class="text-right">
-                <a href="/employee" class="btn btn-danger">Cancel</a>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
         </div>
     </div>
 </form>

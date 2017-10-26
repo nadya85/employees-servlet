@@ -6,48 +6,45 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link href="/css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/styles.css" />
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+
+    <script src="/js/script.js"></script>
 </head>
 <body>
-<div class="container">
-    <h1 class="page-header">
-        Employees
-    </h1>
-    <div class="container-fluid controls-bar">
-        <div class="row">
-            <div class="text-right">
-                <a href="/employee/edit" class="btn btn-default">New</a>
+    <div class="container">
+        <h1 class="page-header">
+            Employees
+        </h1>
+        <div class="container-fluid controls-bar">
+            <div class="row">
+                <div class="text-right">
+                    <a href="/employee/edit" class="btn btn-default edit">New</a>
+                </div>
+            </div>
+        </div>
+        <div id="employeeContainer"></div>
+    </div>
+
+    <div class="modal fade modal-md" role="dialog" id="employeeEditModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Employee</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <table class="table table-bordered" >
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Birth Date</th>
-            <th>Hire Date</th>
-            <th>Department</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody id="employeeData">
-            <tr><td colspan="6" align="center">Loading ...</td></tr>
-        </tbody>
-    </table>
-</div>
-
-<script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-
-<script>
-    $.ajax('/employee').done(function(data) {
-        $('#employeeData').html(data);
-    });
-</script>
 </body>
 </html>

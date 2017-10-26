@@ -76,6 +76,15 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Employee employee = employeeDao.getOne(NumberUtils.toInt(req.getParameter("id"), 0));
+        if (employee != null) {
+            employeeDao.delete(employee);
+        }
+        resp.getWriter().print("OK");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
@@ -131,7 +140,7 @@ public class EmployeeServlet extends HttpServlet {
             } else {
                 employeeDao.update(employee);
             }
-            resp.sendRedirect("/employee");
+            resp.getWriter().print("OK");
         }
     }
 }
