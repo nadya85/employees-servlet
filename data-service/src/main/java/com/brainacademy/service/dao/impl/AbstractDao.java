@@ -62,5 +62,26 @@ public abstract class AbstractDao<T>
         }
     }
 
+    @Override
+    public List<T> getAll(int page) {
+        try (Session session = sessionFactory.openSession()) {
+            TypedQuery<T> query = session.createQuery(
+                    "from " + getEntityType().getSimpleName(),
+                    getEntityType())
+                    .setFirstResult((page - 1) * 10)
+                    .setMaxResults(10);
+            return query.getResultList();
+        }
+    }
+
+    @Override
+    public int count() {
+        try (Session session = sessionFactory.openSession()) {
+            return ((Long) session.createQuery(
+                    "select count(*) from " + getEntityType().getSimpleName())
+                    .uniqueResult()).intValue();
+        }
+    }
+
     protected abstract Class<T> getEntityType();
 }
